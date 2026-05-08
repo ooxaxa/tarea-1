@@ -57,3 +57,83 @@ int main() {
 
     return 0;
 }
+
+#ifndef FUERZA_H
+#define FUERZA_H
+
+#include "Ejercicio.h"
+
+class Fuerza : public Ejercicio {
+public:
+    Fuerza(int intensidad, int tiempo);
+    string getTipo();
+};
+
+#endif
+
+#include "Fuerza.h"
+
+Fuerza::Fuerza(int intensidad, int tiempo) : Ejercicio(intensidad, tiempo) {}
+
+string Fuerza::getTipo() {
+    return "Fuerza";
+}
+
+#ifndef EJERCICIO_H
+#define EJERCICIO_H
+
+#include <string>
+using namespace std;
+
+class Ejercicio {
+protected:
+    int intensidad;
+    int tiempo;
+
+public:
+    Ejercicio(int intensidad, int tiempo);
+    virtual int getIntensidad();
+    virtual int getTiempo();
+    virtual string getTipo() = 0;
+    virtual ~Ejercicio();
+};
+
+#endif
+
+#include "Ejercicio.h"
+
+Ejercicio::Ejercicio(int intensidad, int tiempo) {
+    this->intensidad = intensidad;
+    this->tiempo = tiempo;
+}
+
+int Ejercicio::getIntensidad() {
+    return intensidad;
+}
+
+int Ejercicio::getTiempo() {
+    return tiempo;
+}
+
+Ejercicio::~Ejercicio() {}
+
+#ifndef CARDIO_H
+#define CARDIO_H
+
+#include "Ejercicio.h"
+
+class Cardio : public Ejercicio {
+public:
+    Cardio(int intensidad, int tiempo);
+    string getTipo();
+};
+
+#endif
+
+#include "Cardio.h"
+
+Cardio::Cardio(int intensidad, int tiempo) : Ejercicio(intensidad, tiempo) {}
+
+string Cardio::getTipo() {
+    return "Cardio";
+}
