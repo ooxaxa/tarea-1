@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+#include "Ejercicio.h"
+#include "Cardio.h"
+#include "Fuerza.h"
+
+using namespace std;
+
+vector<Ejercicio*> lista;
+
+void crearEjercicio() {
+    int tipo, intensidad, tiempo;
+    cin >> tipo;
+    cin >> intensidad;
+    cin >> tiempo;
+
+    if (tipo == 1) {
+        lista.push_back(new Cardio(intensidad, tiempo));
+    } else {
+        lista.push_back(new Fuerza(intensidad, tiempo));
+    }
+}
+
+void eliminarEjercicio() {
+    int pos;
+    cin >> pos;
+
+    if (pos >= 0 && pos < lista.size()) {
+        delete lista[pos];
+        lista.erase(lista.begin() + pos);
+    }
+}
+
+void generarRutina() {
+    for (int i = 0; i < lista.size(); i++) {
+        cout << lista[i]->getTipo() << endl;
+        cout << lista[i]->getIntensidad() << endl;
+        cout << lista[i]->getTiempo() << endl;
+    }
+}
+
+int main() {
+    int opcion;
+
+    do {
+        cin >> opcion;
+
+        if (opcion == 1) crearEjercicio();
+        if (opcion == 2) eliminarEjercicio();
+        if (opcion == 3) generarRutina();
+
+    } while (opcion != 4);
+
+    for (int i = 0; i < lista.size(); i++) {
+        delete lista[i];
+    }
+
+    return 0;
+}
